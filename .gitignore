@@ -1,0 +1,54 @@
+# Output Directory
+target/
+dist/
+node_modules
+
+.dcsdk/
+
+# Java
+*.class
+
+json/
+
+# Java Package Files
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Zip Files
+*.rar
+*.zip
+*.7z
+*.tar
+*.gz
+
+# Eclipse
+.settings/
+.classpath
+.project
+.recommenders
+.metadata
+
+# IntelliJ, based on http://devnet.jetbrains.net/docs/DOC-1186
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# logs and trace
+*.log
+*.trace
+*.dat
+
+# Backup Files
+*.bak
+*.old
+
+# SVN metadata
+.svn/
+
+# Mac
+.DS_Store
