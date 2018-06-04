@@ -7,14 +7,16 @@
 
                     <ul class="pure-menu-list">
                         <li class="pure-menu-item" v-for="item in navigation">
-                            <a class="pure-menu-link" :href="item.url">{{item.label}}</a>
+                            <router-link class="pure-menu-link" :to="item.url">{{item.label}}</router-link>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <SideMenu v-bind:navigation="navigation"></SideMenu>
+
+
+        <router-view></router-view>
 
 
 
@@ -22,12 +24,7 @@
 </template>
 
 <script>
-    import SideMenu from './SideMenu.vue';
-
     export default {
-        components: {
-            SideMenu
-        },
         data() {
             return {}
         },
