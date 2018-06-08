@@ -1,4 +1,4 @@
-var htmlWebpackPlugin = require('html-webpack-plugin');
+const htmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 module.exports = {
     mode: "development",
@@ -22,10 +22,10 @@ module.exports = {
                 loader: 'vue-loader'
             },
             {
-                test:/\.css$/,
-                use:[
-                    { loader: "style-loader" },
-                    { loader: "css-loader" }
+                test: /\.css$/,
+                use: [
+                    {loader: "style-loader"},
+                    {loader: "css-loader"}
                 ]
             }
         ]
@@ -33,7 +33,8 @@ module.exports = {
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
-            'vue-router$': 'vue-router/dist/vue-router.esm.js'
+            'vue-router$': 'vue-router/dist/vue-router.esm.js',
+            'vue-resource$': 'vue-resource/dist/vue-resource.esm.js'
         },
         extensions: ['*', '.js', '.vue', '.json']
     },
@@ -42,5 +43,13 @@ module.exports = {
             template: "index.html",
             inject: 'body'
         })
-    ]
+    ],
+    devServer: {
+        proxy: {
+            '/mock/*': {
+                target: 'http://localhost:9090',
+                secure: false
+            }
+        }
+    }
 };

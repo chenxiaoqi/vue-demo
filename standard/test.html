@@ -3,10 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Standard Test</title>
-    <script type="module" src="test.js"></script>
-
+    <script src="test.js"></script>
+    <script src="vue.js"></script>
 </head>
 <body>
 
+<div id="container">
+    <tb-heading v-bind:level="2"><a href="#">Template!</a></tb-heading>
+    <my-component>ni hao.</my-component>
+</div>
 </body>
+
+<script>
+    Vue.component('tb-heading', {
+        render(h) {
+            return h('h' + this.level, this.$slots.default);
+        },
+        props: ['level']
+    });
+
+    Vue.component('my-component', {
+        template: '<h1>{{name}} <slot></slot></h1>',
+        data() {
+            return {name: 'cxq'}
+        },
+        created() {
+            alert(this);
+        }
+    });
+
+    new Vue({
+        el: '#container'
+    });
+</script>
 </html>

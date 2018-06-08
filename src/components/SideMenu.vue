@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <div id="menu">
             <div class="pure-menu">
@@ -17,15 +16,16 @@
         <div id="main">
 
             <div class="content">
-                <router-view></router-view>
+                <transition>
+                    <router-view></router-view>
+                </transition>
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
     export default {
-        props:['navigation']
+        props: ['navigation']
     }
 </script>

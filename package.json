@@ -4,7 +4,8 @@
   "description": "Vue js with Webpack project setup",
   "scripts": {
     "dev": "webpack-dev-server --mode development",
-    "prod": "webpack --mode production"
+    "prod": "webpack --mode production",
+    "mock": "json-server --watch src/mock/test.json --routes src/mock/route.json --port 9090"
   },
   "author": "chenxiaoqi",
   "license": "ISC",
@@ -27,6 +28,7 @@
     "jquery": "^3.3.1",
     "purecss": "^1.0.0",
     "vue": "^2.5.16",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1"
   }
 }

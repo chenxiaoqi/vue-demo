@@ -7,9 +7,31 @@
     <title>Setup Vue.js with Webpack 4</title>
 </head>
 <body>
-<div id="app"></div>
+
+<script type="text/x-template" id="x-component">
+    <h1>haha</h1>
+</script>
 
 
-<div id="counter"></div>
+<div id="app">
+</div>
+
+<div id="x-container">
+    <x-component></x-component>
+</div>
 </body>
+
+
+
+<script>
+    // Vue.component('x-component',{
+    //     template:'#x-component'
+    // });
+    new Vue({
+        components: {
+            'x-component': {template: '#x-component'}
+        },
+        el: '#x-container'
+    });
+</script>
 </html>
