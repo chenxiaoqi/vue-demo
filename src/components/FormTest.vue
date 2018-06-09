@@ -29,9 +29,10 @@
                     {{modelSelect}}
                 </li>
                 <li>
-                    <ms-input label="ms input" regex="^[0-9]{1,5}$" v-model="msInputModel"></ms-input>
+                    <ms-input label="ms input" v-on="inputListeners" placeholder="input your fucking name" regex="^[0-9]{1,5}$" v-model="msInputModel"></ms-input>
                     {{msInputModel}}
                 </li>
+                <li>checkbox component<base-checkbox v-model="lovingVue"></base-checkbox>{{lovingVue}}</li>
                 <li><input type="submit" value="submit"></li>
             </ol>
         </form>
@@ -47,7 +48,8 @@
 <script>
 
     let msInput = {
-        template: `<span><label>{{label}}</label><input type="text" @input="input" :class="{'error-input':error}"></span>`,
+        inheritAttrs:false,
+        template: `<span tabindex="1"><label>{{label}}</label><input v-bind="$attrs" type="text" @input="input" :class="{'error-input':error}"></span>`,
         props: ['label', 'regex'],
         data() {
             return {
@@ -68,9 +70,22 @@
         }
     };
 
+    let baseCheckBox = {
+        model:{
+            prop:'checked',
+            event:'change'
+        },
+        props:{checked :Boolean},
+        template:`<input
+                    type="checkbox"
+                    v-bind:checked="checked"
+                    v-on:change="$emit('change', $event.target.checked)">`
+    };
+
     export default {
         components: {
-            'ms-input': msInput
+            'ms-input': msInput,
+            'base-checkbox':baseCheckBox
         },
         data() {
             return {
@@ -81,13 +96,27 @@
                 modelRadio: '',
                 modelSelect: '',
                 modelNumberInput: null,
-                msInputModel: null
+                msInputModel: null,
+                lovingVue:true
             };
+        },
+        computed:{
+            inputListeners (){
+                let vm = this;
+                return Object.assign({},this.$listeners,
+                            {
+                                focus(event){alert(1);},
+                                input(event){alert(2);}
+                            }
+                        );
+            }
         },
         methods: {
             submit() {
-                alert
                 this.$http.get("form.html", {emulateHTTP: true, params: {modelMultiCheckBox: this.modelMultiCheckBox}});
+            },
+            onfocus(event){
+                app.log(event);
             }
         }
     }

@@ -99,6 +99,12 @@ const routes = [
 Vue.use(VueRouter);
 Vue.use(VueHttp);
 
+Vue.http.interceptors.push(function(request,next){
+   next(response=>{
+        app.log(`${response.status}=>${response.url}`);
+   });
+});
+
 
 Vue.component('my-component', {
     template:
@@ -113,6 +119,10 @@ Vue.component('my-component', {
     data() {
         return {message: 'hi', name: "cxq"};
     }
+});
+
+Vue.component('async-component',function(resolve,reject){
+    require(['./components/AnsyncComponent'],resolve);
 });
 
 

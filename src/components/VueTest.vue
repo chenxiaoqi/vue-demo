@@ -21,20 +21,58 @@
         <div v-if="show" v-html="html"></div>
 
         <my-component @event-haha="click"></my-component>
+
+        <fieldset>
+            <legend>dynamic component</legend>
+            <button @click="component=componentA">componentA</button>
+            <button @click="component=componentB">componentB</button>
+            <div :is="component"></div>
+        </fieldset>
+
+        <fieldset>
+            <legend>slot</legend>
+            <my-layout>
+                <template slot="header">
+                    <h1>Here might be a page title</h1>
+                </template>
+
+                <p>A paragraph for the main content.</p>
+                <p>And another one.</p>
+
+                <template slot="footer">
+                    <p>Here's some contact info</p>
+                </template>
+            </my-layout>
+        </fieldset>
+
+        <fieldset>
+            <legend>async component</legend>
+            <async-component></async-component>
+        </fieldset>
     </div>
 </template>
 
 <style>
-    .active {
-        background-color: #1f8dd6;
-    }
+.active {
+    background-color: #1f8dd6;
+}
 
-    .deactive {
-        background-color: #b94a48;
-    }
+.deactive {
+    background-color: #b94a48;
+}
 </style>
 
 <script>
+
+
+
+    let componentA = {
+        template:'<div>Component A</div>'
+    };
+
+    let componentB = {
+        template:'<div>Component B</div>'
+    };
     export default {
         data() {
             return {
@@ -42,9 +80,9 @@
                 show: true,
                 name: 'cxq',
                 list: [
-                    {id: 2, value: "value2"},
-                    {id: 1, value: "value1"},
-                    {id: 3, value: "value3"}
+                {id: 2, value: "value2"},
+                {id: 1, value: "value1"},
+                {id: 3, value: "value3"}
                 ],
                 classObject: {
                     deact: 'deactive'
@@ -52,10 +90,26 @@
                 styleObject: {
                     color: 'blue',
                     fontSize: '19px'
-                }
-
-
+                },
+                componentA,
+                componentB,
+                component:componentA
             };
+        },
+        components:{
+            'my-layout':{
+                template:`<div class="container">
+                <header>
+                <slot name="header"></slot>
+                </header>
+                <main>
+                <slot></slot>
+                </main>
+                <footer>
+                <slot name="footer"></slot>
+                </footer>
+                </div>`
+            }
         },
         methods: {
             click() {
