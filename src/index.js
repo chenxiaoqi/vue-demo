@@ -147,6 +147,11 @@ router.beforeEach((to, from, next) => {
 
 new Vue({
     router,
+    methods:{
+        baz(){
+            alert("baz");
+        }
+    },
     render: (h) => h(AppComponent, {
         props: {
             navigation

@@ -106,17 +106,14 @@
                 return Object.assign({},this.$listeners,
                             {
                                 focus(event){alert(1);},
-                                input(event){alert(2);}
                             }
                         );
             }
         },
         methods: {
             submit() {
+                this.$root.baz();
                 this.$http.get("form.html", {emulateHTTP: true, params: {modelMultiCheckBox: this.modelMultiCheckBox}});
-            },
-            onfocus(event){
-                app.log(event);
             }
         }
     }

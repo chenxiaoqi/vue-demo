@@ -53,25 +53,24 @@
 </template>
 
 <style>
-.active {
-    background-color: #1f8dd6;
-}
+    .active {
+        background-color: #1f8dd6;
+    }
 
-.deactive {
-    background-color: #b94a48;
-}
+    .deactive {
+        background-color: #b94a48;
+    }
 </style>
 
 <script>
 
 
-
     let componentA = {
-        template:'<div>Component A</div>'
+        template: '<div>Component A</div>'
     };
 
     let componentB = {
-        template:'<div>Component B</div>'
+        template: '<div>Component B</div>'
     };
     export default {
         data() {
@@ -80,9 +79,9 @@
                 show: true,
                 name: 'cxq',
                 list: [
-                {id: 2, value: "value2"},
-                {id: 1, value: "value1"},
-                {id: 3, value: "value3"}
+                    {id: 2, value: "value2"},
+                    {id: 1, value: "value1"},
+                    {id: 3, value: "value3"}
                 ],
                 classObject: {
                     deact: 'deactive'
@@ -93,12 +92,12 @@
                 },
                 componentA,
                 componentB,
-                component:componentA
+                component: componentA
             };
         },
-        components:{
-            'my-layout':{
-                template:`<div class="container">
+        components: {
+            'my-layout': {
+                template: `<div class="container">
                 <header>
                 <slot name="header"></slot>
                 </header>
