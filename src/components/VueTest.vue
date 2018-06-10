@@ -49,6 +49,11 @@
             <legend>async component</legend>
             <async-component></async-component>
         </fieldset>
+
+        <fieldset>
+            <legend>vuex</legend>
+            <Counter></Counter>
+        </fieldset>
     </div>
 </template>
 
@@ -72,6 +77,16 @@
     let componentB = {
         template: '<div>Component B</div>'
     };
+
+    const Counter =  {
+        template:`<div>{{count}}<button @click="$store.commit('increment')">incr</button></div>`,
+        computed:{
+            count(){
+                return this.$store.state.count;
+            }
+        }
+    };
+
     export default {
         data() {
             return {
@@ -108,7 +123,8 @@
                 <slot name="footer"></slot>
                 </footer>
                 </div>`
-            }
+            },
+            'Counter': Counter
         },
         methods: {
             click() {

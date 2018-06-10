@@ -6,6 +6,7 @@ import SideMenu from './components/SideMenu.vue';
 import User from './components/User.vue';
 import VueTest from './components/VueTest.vue';
 import FormTest from './components/FormTest.vue';
+import Vuex from 'vuex';
 
 require("./style/pure.css");
 require("./style/side-menu.css");
@@ -98,11 +99,12 @@ const routes = [
 
 Vue.use(VueRouter);
 Vue.use(VueHttp);
+Vue.use(Vuex);
 
-Vue.http.interceptors.push(function(request,next){
-   next(response=>{
+Vue.http.interceptors.push(function (request, next) {
+    next(response => {
         app.log(`${response.status}=>${response.url}`);
-   });
+    });
 });
 
 
@@ -121,8 +123,8 @@ Vue.component('my-component', {
     }
 });
 
-Vue.component('async-component',function(resolve,reject){
-    require(['./components/AnsyncComponent'],resolve);
+Vue.component('async-component', function (resolve, reject) {
+    require(['./components/AnsyncComponent'], resolve);
 });
 
 
@@ -145,10 +147,22 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
+const store = new Vuex.Store({
+    state: {
+        count: 0,
+    },
+    mutations: {
+        increment(state) {
+            state.count++;
+        }
+    }
+});
+
 new Vue({
     router,
-    methods:{
-        baz(){
+    store,
+    methods: {
+        baz() {
             alert("baz");
         }
     },
