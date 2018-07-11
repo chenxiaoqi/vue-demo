@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="jquery-ui.css" rel="stylesheet">
+    <script src="jquery.js"></script>
+    <script src="jquery-ui.js"></script>
+    <style>
+        .ws-panel {
+            float: left;
+            height: 200px;
+            border: 1px solid gray;
+            margin-left: 20px;
+            padding: 0 10px;
+        }
+
+        .ws-drag-anchor {
+            height: 20px;
+            border: 1px solid gray;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .ws-form-component {
+            height: 20px;
+            border: 2px solid green;
+            text-align: center;
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ws-panel" style="width: 100px;">
+    <div class="ws-drag-anchor">label</div>
+    <div class="ws-drag-anchor">input</div>
+    <div class="ws-drag-anchor">file</div>
+</div>
+
+
+<div id="editArea" class="ws-panel" style="width: 300px;">
+
+</div>
+
+
+<div class="ws-panel" style="width: 100px;">
+
+</div>
+<script>
+    var WS = {};
+    WS.generateName = function (prefix) {
+        return prefix + new Date().getTime();
+    };
+    $(document).ready(function () {
+        $(".ws-drag-anchor").each(function () {
+            $(this).draggable({cursor: "move", revert: true, helper: null, wsIndex: this.innerText});
+        });
+        $("#editArea").droppable({
+            drop: function (event, ui) {
+
+                var componentType = ui.draggable.draggable("option", "wsIndex");
+                if (!componentType) {
+                    return;
+                }
+                $("<div class='ws-form-component'>" + componentType + "</div>").attr("id",WS.generateName(componentType)).draggable().appendTo(this);
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
