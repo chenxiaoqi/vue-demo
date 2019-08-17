@@ -150,10 +150,22 @@ router.beforeEach((to, from, next) => {
 const store = new Vuex.Store({
     state: {
         count: 0,
+        todos: [
+            {id: 1, text: '...', done: 1},
+            {id: 2, text: '...', done: false}
+        ]
     },
     mutations: {
-        increment(state) {
-            state.count++;
+        increment(state, n) {
+            state.count = state.count + n;
+        }
+    },
+    getters: {
+        doneTodos: state => {
+            return state.todos.filter(todo => todo.done)
+        },
+        doneTodosCount: (state, getters) => {
+            return getters.doneTodos.length
         }
     }
 });

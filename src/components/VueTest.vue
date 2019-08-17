@@ -68,6 +68,7 @@
 </style>
 
 <script>
+    import {mapGetters, mapState,mapMutations } from 'vuex'
 
 
     let componentA = {
@@ -78,12 +79,29 @@
         template: '<div>Component B</div>'
     };
 
-    const Counter =  {
-        template:`<div>{{count}}<button @click="$store.commit('increment')">incr</button></div>`,
-        computed:{
-            count(){
-                return this.$store.state.count;
-            }
+    const Counter = {
+        template: `<div>{{countAlias}}|{{count}}|{{countPlusLocalState}}
+                        <button @click="increment(3)">incr</button>
+                        <button @click="$store.commit('increment',5)">commit incr</button>
+                        <div>{{doneTodosCount}}</div>
+                   </div>`,
+        data(){
+            return {localCount:10};
+        },
+        computed: {
+            ...mapState({
+                count: state => state.count,
+                countAlias:'count',
+                countPlusLocalState (state) {
+                    return state.count + this.localCount
+                }
+            }),
+            ...mapGetters([
+                'doneTodosCount'
+            ])
+        },
+        methods:{
+            ...mapMutations(['increment'])
         }
     };
 
