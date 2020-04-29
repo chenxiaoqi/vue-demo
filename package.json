@@ -24,7 +24,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "json-server": "^0.13.0",
     "purecss": "^1.0.0",
     "vue": "^2.5.16",
